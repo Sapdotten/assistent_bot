@@ -1,7 +1,7 @@
 import json
-import subprocess
-import time
 import urllib.parse
+from typing import Any
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -30,7 +30,7 @@ def vless_to_xray_config(vless_url: str, socks_port: int = 10808) -> dict:
     sni = q.get("sni", [address])[0]
     fp = q.get("fp", ["chrome"])[0]
 
-    stream_settings = {"network": network, "security": security}
+    stream_settings: dict[str, Any] = {"network": network, "security": security}
 
     if security in ("tls", "reality"):
         tls_settings = {"serverName": sni, "fingerprint": fp}
