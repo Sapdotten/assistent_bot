@@ -1,0 +1,16 @@
+services:
+  proxy:
+    
+    build:
+      context: ../src/proxy
+      dockerfile: ../../.docker/DockerfileProxy
+      target: prod
+      args:
+        PROXY_CONNECTION_LINK: ${PROXY_CONNECTION_LINK}
+        PROXY_PORT: ${PROXY_PORT}
+        PROXY_CONFIG_PATH: ${PROXY_CONFIG_PATH}
+    env_file:
+      - .env
+    ports:
+      - "${PROXY_PORT}:${PROXY_PORT}"
+    
